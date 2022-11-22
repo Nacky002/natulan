@@ -3,7 +3,7 @@
 
 int main ()
 {
-    int i = 444;
+    int i = 333;
 
     FILE *open;
     open = fopen("test.txt", "w");
@@ -12,4 +12,6 @@ int main ()
     fprintf(open, "%d\n", i);
 
     fclose(open);
+
+    return 1;
 }
