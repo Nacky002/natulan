@@ -2,9 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MEM_SIZE 100            //読み込みたいデータの文字数
-#define READ_FILE "in.txt"      //任意のファイル（標準入力も可）
-#define WRITE_FILE "out.txt"    //任意のファイル
+/* 入力ファイル内の文字数 */
+#define MEM_SIZE 100
+/* 入力ファイル */
+#define READ_FILE "in.txt"
+/* 出力ファイル */
+#define WRITE_FILE "out.txt"
 
 int main()
 {
