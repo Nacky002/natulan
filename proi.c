@@ -60,7 +60,7 @@ int main()
         if( isalpha(txt[i]) );
         else if( txt[i] == ' ' );
         else if( txt[i] == '\n' );
-        else txt[i] = ' ';
+        else txt[i] = ',';
     }
 
 
@@ -96,7 +96,7 @@ int main()
         else if( txt[i] == 'z' || txt[i] == 'Z' ) half[25] ++;
         else if( txt[i] == ' ' ) half[26] ++;
         else if( txt[i] == '\n' ) half[27] ++;
-        else perror("\n予期せぬ文字が含まれています。\n");
+        else ;
     }
 
 
@@ -113,6 +113,31 @@ int main()
 
     fprintf(write, "%u a found\n", half[0]);
     fprintf(write, "%u b found\n", half[1]);
+    fprintf(write, "%u c found\n", half[2]);
+    fprintf(write, "%u d found\n", half[3]);
+    fprintf(write, "%u e found\n", half[4]);
+    fprintf(write, "%u f found\n", half[5]);
+    fprintf(write, "%u g found\n", half[6]);
+    fprintf(write, "%u h found\n", half[7]);
+    fprintf(write, "%u i found\n", half[8]);
+    fprintf(write, "%u j found\n", half[9]);
+    fprintf(write, "%u k found\n", half[10]);
+    fprintf(write, "%u l found\n", half[11]);
+    fprintf(write, "%u m found\n", half[12]);
+    fprintf(write, "%u n found\n", half[13]);
+    fprintf(write, "%u o found\n", half[14]);
+    fprintf(write, "%u p found\n", half[15]);
+    fprintf(write, "%u q found\n", half[16]);
+    fprintf(write, "%u r found\n", half[17]);
+    fprintf(write, "%u s found\n", half[18]);
+    fprintf(write, "%u t found\n", half[19]);
+    fprintf(write, "%u u found\n", half[20]);
+    fprintf(write, "%u v found\n", half[21]);
+    fprintf(write, "%u w found\n", half[22]);
+    fprintf(write, "%u x found\n", half[23]);
+    fprintf(write, "%u y found\n", half[24]);
+    fprintf(write, "%u z found\n", half[25]);
+    fprintf(write, "%u ' ' found\n", half[26]);
 
     /* 出力を閉じる ------------------------------------*/
     fclose(write);
