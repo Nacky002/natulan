@@ -1,8 +1,12 @@
+   
 test test hoge hoge
 aaaaaaa
-gggggggg
+ t t t t t
 bbbb
 ok ok ok
 zzzzzzzzzzzz
 sssssssss
-00000000000000000000000000
+      
+ggggg
+             
+ 
