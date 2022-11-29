@@ -7,12 +7,16 @@
 #define WRITE_FILE  "out.txt"    // 出力ファイル
 
 unsigned char Get_freq (unsigned char elem);
+void Print (unsigned char 1d, unsigned char 2d, unsigned char 3d);
 
 int main ()
 {
     char one_buf = 0;
     char two_buf = 0;
     char txt[CHAR_QUA] = {};
+    unsigned char 1d_buf = 0;
+    unsigned char 2d_buf = 0;
+    unsigned char 3d_buf = 0;
     unsigned int in_max = 0;
     unsigned int i = 0;
     unsigned int j = 0;
@@ -40,7 +44,7 @@ int main ()
         if (one_buf == EOF) break;
         else if ( isalpha(one_buf)  ||  one_buf == 32 )
         {
-            txt[in_max] = one_buf;
+            txt[in_max] = one_buf;kk
             in_max ++;
         }
     }
@@ -50,55 +54,19 @@ int main ()
 
 
     /* 文字の出現頻度を求める */
-    for (j = 0; j <= in_max; j++)   //all txt
+    for (i = 0; i <= in_max; i++)
     {
-        for (i = 0; i <= 25; i++)   //txt f [i]
+        1d_buf = Get_freq ( two_buf );
+        2d_buf = Get_freq ( one_buf );
+        3d_buf = Get_freq ( txt[i] );
+
+        if (one_buf != 0 && two_buf != 0)
         {
-            if ( txt[j] == (65 + i)  ||  txt[j] == (97 + i) )
-            {
-                for (k = 0; k <= 25; k++)   //one f [k]
-                {
-                    if ( one_buf == (65 + k)  ||  one_buf == (97 + k) )
-                    {
-                        for (l = 0; l <= 25; l++)
-                        {
-                            if ( two_buf == (65 + l)  ||  two_buf == (97 + l) ) fleq[i][k][l] ++;
-                        }
-                        if (two_buf == 32) fleq[i][k][26] ++;
-                    }
-                }
-                if (one_buf == 32)
-                {
-                    for (l = 0; l <= 25; l++)   //two f [l]
-                    {
-                        if ( two_buf == (65 + l)  ||  two_buf == (97 + l) ) fleq[i][26][l] ++;
-                    }
-                    if (two_buf == 32) fleq[i][26][26] ++;
-                }
-            }
+            freq[ 1d_buf ][ 2d_buf ][ 3d_buf ] ++ ;
         }
-        if (txt[j] == 32)
-        {
-            for (k = 0; k <= 25; k++)   //one f [k]
-            {
-                if ( one_buf == (65 + k)  ||  one_buf == (97 + k) )
-                {
-                    for (l = 0; l <= 25; l++)   //two f [l]
-                    {
-                        if ( two_buf == (65 + l)  ||  two_buf == (97 + l) ) fleq[26][k][l] ++;
-                    }
-                    if (two_buf == 32) fleq[26][k][26] ++;
-                }
-            }
-            if (one_buf == 32)
-            {
-                for (l = 0; l <= 25; l++)   //two f [l]
-                {
-                    if ( two_buf == (65 + l)  ||  two_buf == (97 + l) ) fleq[26][26][l] ++;
-                }
-                if (two_buf == 32) fleq[26][26][26] ++;
-            }
-        }
+
+        one_buf = txt[i];
+        two_buf = one_buf;
     }
 
 
@@ -116,14 +84,19 @@ int main ()
     for (i = 0; i <= 25; i++) fprintf (write, "%u %c found\n", fleq[i], (97 + i) );
     fprintf (write, "%u '%c' found\n", fleq[26], 32);
 
+    for (i = 0; i <= 25; i++)
+    {
+        for (j = 0; j <= 25; j++)
+        {
+            Print (i, j);:
+        }
+
+
     /* 出力を閉じる ------------------------------------*/
     fclose(write);
 
     return 0;
 }
-
-
-
 
 
 unsigned char Get_freq (unsigned char elem)
@@ -138,6 +111,18 @@ unsigned char Get_freq (unsigned char elem)
     if (elem == 32) ret = 26;
     
     return ret;
+}
+
+
+void Print (unsigned char 1d, unsigned char 2d)
+{
+    unsigned char i = 0;
+
+    for (i = 0; i <= 26; i++)
+    {
+        if (i == 26) fprintf( write, "%c", (6 + i) );
+        else fprintf( write, "%c", (97 + i) );
+    }
 }
 
 
