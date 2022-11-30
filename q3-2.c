@@ -63,8 +63,8 @@ int main ()
             freq[ x_buf ][ y_buf ][ z_buf ] ++ ;
         }
 
-        one_buf = txt[i];
         two_buf = one_buf;
+        one_buf = txt[i];
     }
 
 
