@@ -3,26 +3,23 @@
 #include <ctype.h>
 #include <time.h>
 
-#define CHAR_QUA    10000        // 最大文字数
+#define CHAR_QUA    100000        // 最大文字数
 #define READ_FILE   "in.txt"     // 入力ファイル
 #define WRITE_FILE  "out.txt"    // 出力ファイル
+#define OUT_QUA     1000
 
 unsigned int Get_random (unsigned int min, unsigned int max);
 unsigned char Get_freq (unsigned char elem);
 
 int main ()
 {
+    char A = 0;
     char one_buf = 0;
-    char two_buf = 0;
     char txt[CHAR_QUA] = {};
-    unsigned char x_buf = 0;
-    unsigned char y_buf = 0;
-    unsigned char z_buf = 0;
     unsigned int in_max = 0;
     unsigned int i = 0;
-    unsigned char j = 0;
-    unsigned char k = 0;
-    unsigned int freq[27][27][27] = {};
+    unsigned int j = 0;
+    unsigned short k = 0;
     FILE* read = NULL;
     FILE* write = NULL;
 
@@ -53,21 +50,8 @@ int main ()
     fclose(read);
 
 
-    /* 文字の出現頻度を求める */
-    for (i = 0; i <= in_max; i++)
-    {
-        x_buf = Get_freq ( two_buf );
-        y_buf = Get_freq ( one_buf );
-        z_buf = Get_freq ( txt[i] );
-
-        if (one_buf != 0 && two_buf != 0)
-        {
-            freq[ x_buf ][ y_buf ][ z_buf ] ++ ;
-        }
-
-        one_buf = txt[i];
-        two_buf = one_buf;
-    }
+    /* 乱数の初期値設定 */
+    srand( (unsigned int)time(NULL) );
 
 
     /* 出力ファイルを開く ------------------------------*/
@@ -80,44 +64,27 @@ int main ()
         return 1;
     }
 
-    /* 文字の出現頻度を書き込む */
-    for (i = 0; i <= 25; i++)
+    i = Get_random(0, in_max);
+    fprintf(write, "%c", txt[i]);
+    A = txt[(i + 1)];
+    fprintf(write, "%c", A);
+
+    while (k <= OUT_QUA)
     {
-        for (j = 0; j <= 25; j++)
+        i = Get_random(0, in_max);
+
+        for (j = (i +  1); j <= in_max; j++)
         {
-            for (k = 0; k <= 25; k++)
+            if (txt[j] == A)
             {
-                fprintf(write, "[%c%c%c] =", (97 + i), (97 + j), (97 + k));
-                fprintf(write, "%u\n", freq[i][j][k]);
+                A = txt[j + 1];
+                fprintf(write, "%c", A);
+                break;
             }
-            fprintf(write, "[%c%c%c] =", (97 + i), (97 + j), 32);
-            fprintf(write, "%u\n", freq[i][j][26]);
         }
-        for (k = 0; k <= 25; k++)
-        {
-            fprintf(write, "[%c%c%c] =", (97 + i), 32, (97 + k));
-            fprintf(write, "%u\n", freq[i][26][k]);
-        }
-        fprintf(write, "[%c%c%c] =", (97 + i), 32, 32);
-        fprintf(write, "%u\n", freq[i][26][26]);
+
+        k++;
     }
-    for (j = 0; j <= 25; j++)
-    {
-        for (k = 0; k <= 25; k++)
-        {
-            fprintf(write, "[%c%c%c] =", 32, (97 + j), (97 + k));
-            fprintf(write, "%u\n", freq[26][j][k]);
-        }
-        fprintf(write, "[%c%c%c] =", 32, (97 + j), 32);
-        fprintf(write, "%u\n", freq[26][j][26]);
-    }
-    for (k = 0; k <= 25; k++)
-    {
-        fprintf(write, "[%c%c%c] =", 32, 32, (97 + k));
-        fprintf(write, "%u\n", freq[26][26][k]);
-    }
-    fprintf(write, "[%c%c%c] =", 32, 32, 32);
-    fprintf(write, "%u\n", freq[26][26][26]);
 
     /* 出力を閉じる ------------------------------------*/
     fclose(write);
@@ -145,6 +112,5 @@ unsigned int Get_random (unsigned int min, unsigned int max)
 {
     return min + (unsigned int)( rand() * (max - min + 1.0) / (RAND_MAX + 1.0) );
 }
-
 
 
