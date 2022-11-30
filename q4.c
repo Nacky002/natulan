@@ -3,19 +3,12 @@
 #include <ctype.h>
 #include <time.h>
 
-#define MEM_SIZE    1000         // 読み込み可能最大文字数
+#define MEM_SIZE    100000       // 読み込み可能最大文字数
 #define READ_FILE   "in.txt"     // 入力ファイル
 #define WRITE_FILE  "out.txt"    // 出力ファイル
-#define RANDOM_NUM  1000          // ランダムに生成する文字数
+#define RANDOM_NUM  1000         // ランダムに生成する文字数
 
-unsigned int Get_random (unsigned int get_min, unsigned int get_max);
-
-unsigned int Get_random (unsigned int get_min, unsigned int get_max)
-{
-    return get_min + (unsigned int)( rand() * (get_max - get_min + 1.0) / (RAND_MAX + 1.0) );
-}
-
-
+unsigned int Get_random (unsigned int min, unsigned int max);
 
 int main ()
 {
@@ -29,7 +22,6 @@ int main ()
     FILE* write = NULL;
 
 
-
     /* 入力ファイル保存用の、配列のメモリ確保 */
     txt = (char*)malloc( sizeof(char) * MEM_SIZE );
 
@@ -39,7 +31,6 @@ int main ()
         perror("\n配列のメモリ確保に失敗しました。\n");
         return 1;
     }
-
 
 
     /* 入力ファイルを開く ------------------------------*/
@@ -68,19 +59,8 @@ int main ()
     fclose(read);
 
 
-
-    /* 頻度を求める */
-    for (j = 0; j <= in_max; j++)
-    {
-        for (i = 0; i <= 25; i++) if ( txt[j] == (65 + i)  ||  txt[j] == (97 + i) ) fleq[i] ++;
-        if (txt[j] == 32) fleq[26] ++;
-    }
-
-
-
-    /* 乱数 */
+    /* 乱数の初期値設定 */
     srand( (unsigned int)time(NULL) );
-
 
 
     /* 出力ファイルを開く ------------------------------*/
@@ -104,6 +84,16 @@ int main ()
 
     /* 出力を閉じる ------------------------------------*/
     fclose(write);
+    
+    free(txt);
 
     return 0;
 }
+
+
+unsigned int Get_random (unsigned int min, unsigned int max)
+{
+    return min + (unsigned int)( rand() * (max - min + 1.0) / (RAND_MAX + 1.0) );
+}
+
+

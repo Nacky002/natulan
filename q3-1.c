@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#define CHAR_QUA    10000        // 最大文字数
+#define CHAR_QUA    100000       // 最大文字数
 #define READ_FILE   "in.txt"     // 入力ファイル
 #define WRITE_FILE  "out.txt"    // 出力ファイル
 
