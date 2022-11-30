@@ -9,7 +9,6 @@
 #define OUT_QUA     1000
 
 unsigned int Get_random (unsigned int min, unsigned int max);
-unsigned char Get_freq (unsigned char elem);
 
 int main ()
 {
@@ -90,21 +89,6 @@ int main ()
     fclose(write);
 
     return 0;
-}
-
-
-unsigned char Get_freq (unsigned char elem)
-{
-    unsigned char i = 0;
-    unsigned char ret = 0;
-
-    for (i = 0; i <= 25; i++)
-    {
-        if ( elem == (65 + i)  ||  elem == (97 + i) ) ret = i;
-    }
-    if (elem == 32) ret = 26;
-    
-    return ret;
 }
 
 
